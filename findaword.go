@@ -13,14 +13,14 @@ func readTextFile() []string {
 	//Pass the file name to the ReadFile() function from
 	//the util package to get the content of the file.
 
-	content, error := os.ReadFile("russian_nouns.txt")
+	content, err := os.ReadFile("russian_nouns.txt")
 
 	// defer .Close()
 	// Check whether the 'error' is nil or not. If it
 	//is not nil, then print the error and exit.
-	if error != nil {
+	if err != nil {
 
-		log.Fatal(error)
+		log.Fatal(err)
 	}
 
 	// convert the content into a string
@@ -74,22 +74,22 @@ func main() {
 		var letter string
 		fmt.Println("Если хотите закончить программу, напишите - конец")
 		fmt.Println("Если вы хотите ограничить длину поиска, напишите - число")
-		fmt.Println("Enter letter: ")
-		fmt.Scan("%s\n", &letter)
+		fmt.Print("Enter letter: ")
+		fmt.Scanln(&letter)
 		if letter == "конец" {
 			endProgram = true
 			break
 		}
 		if letter == "число" {
 			var a int
-			fmt.Println("Введите число: ")
-			fmt.Scan("%d\n", &a)
+			fmt.Print("Введите число: ")
+			fmt.Scanln(&a)
 			arr = shrinkByLen(arr, a)
 			fmt.Println(arr)
 			fmt.Println(len(arr))
 		}
 
-		if letter != "число" || letter != "конец" {
+		if letter != "число" && letter != "конец" {
 			arr = findMatch(arr, letter)
 			fmt.Println(arr)
 			fmt.Println(len(arr))
